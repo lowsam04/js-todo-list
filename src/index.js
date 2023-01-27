@@ -1,19 +1,36 @@
 import { createToDo } from "./create-to-do";
-import { initialdomManip } from "./initial-dom-manip";
 import { blankProjectLoad } from "./blank-project-load";
+import { displayDefaultProject, displayTheForm, addItemToCheckList, clearForm, displayToDo } from "./dom-manip";
+import './style.css';
 
 // Call blankProjectLoad on first land
 blankProjectLoad()
 
 // Call Dom manipulation module to control UI
-initialdomManip();
+// displayDefaultProject();
 
-// TODO: click event module HERE for todo and project creations
+// Call displayToDo on fist land - pulls from web local storage API
+displayToDo();
 
-// Call create-to-to.js module fuile and apply some objects/properties
-const myToDo = createToDo("Grocery", "Go get groceries", "6/15/2022", "Low", "Meat");
-const myToDo2 = createToDo("Grocery2", "Go get groceries2", "6/15/202222", "Low2", "Meat2");
-console.log("Show me properties on myToDo frome index.js....", myToDo);
-console.log("Show me properties on myToDo2 frome index.js....", myToDo2);
+// Click events module
+let clickEventsModule = (function() {
+
+    // Click event for displaying the form
+    const addNewToDo = document.querySelector(".add-todo-button");
+    addNewToDo.addEventListener("click", displayTheForm);
+
+    // Click event for adding an item to the checklist on the form
+    const addToChecklist = document.querySelector(".add-to-checklist");
+    addToChecklist.addEventListener("click", addItemToCheckList);
+
+    // Click event to clear the form
+    const clearButton = document.querySelector(".reset-button");
+    clearButton.addEventListener("click", clearForm);
+
+    // Click event to submit a new todo form to project
+    const submitButton = document.querySelector(".submit-button");
+    submitButton.addEventListener("click", createToDo);
+
+})();
 
 
